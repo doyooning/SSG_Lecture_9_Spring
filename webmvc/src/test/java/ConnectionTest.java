@@ -15,7 +15,6 @@ public class ConnectionTest {
 
         Assertions.assertNotNull(conn);
         conn.close();
-
     }
 
     @Test
