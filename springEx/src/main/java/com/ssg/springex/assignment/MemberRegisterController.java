@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
-@WebServlet(name="registerController", urlPatterns = "/register")
+@WebServlet(name="registerController", urlPatterns = "/assignment/register")
 public class MemberRegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,9 @@ public class MemberRegisterController extends HttpServlet {
         String[] hobbies = req.getParameterValues("user_hobby");
         vo.setHobby(Arrays.toString(hobbies));
 
-        String username = dao.saveMember(vo);
+        boolean result = dao.saveMember(vo);
+        req.setAttribute("user_id", vo.getId());
+        req.setAttribute("result", result);
 
         RequestDispatcher rd = req.getRequestDispatcher("/assignment/result.jsp");
         rd.forward(req, resp);

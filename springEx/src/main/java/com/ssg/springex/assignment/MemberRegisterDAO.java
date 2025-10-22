@@ -24,17 +24,19 @@ public class MemberRegisterDAO {
         }
     }
 
-    public String saveMember(MemberRegisterVO vo) {
-
+    public boolean saveMember(MemberRegisterVO vo) {
+        boolean result = false;
         try {
             connDB();
             String sql = "insert into memberinfo values(?, ?, ?, ?);";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, vo.getId());
+            pstmt.setString(2, vo.getPassword());
+            pstmt.setString(3, vo.getGender());
+            pstmt.setString(4, vo.getHobby());
 
-            stmt.executeUpdate(sql);
-
-
-
-
+            int count = pstmt.executeUpdate();
+            result = count > 0;
 
             stmt.close();
             conn.close();
@@ -42,6 +44,6 @@ public class MemberRegisterDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return result;
     }
 }

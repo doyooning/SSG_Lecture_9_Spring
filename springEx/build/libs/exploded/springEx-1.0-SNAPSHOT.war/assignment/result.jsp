@@ -23,6 +23,7 @@
     <%
     }
     %>
+    <p></p>
     <a href="/assignment/memberRegister.html">첫 화면으로</a>
 </body>
 </html>
