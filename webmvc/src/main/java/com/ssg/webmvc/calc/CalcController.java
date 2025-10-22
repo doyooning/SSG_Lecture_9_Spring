@@ -21,6 +21,6 @@ public class CalcController extends HttpServlet {
         // post 방식과 redirect를 결합해서 사용하고 있음
         // 사용자는 컨트롤러에 원하는 작업을 Post방식으로 처리하기를 요청
         // Post방식을 컨트롤러에서 처리하고 브라우저는 다른 경로로 이동(Get)하라는 응답(Redirect)
-        // 
+
     }
 }
