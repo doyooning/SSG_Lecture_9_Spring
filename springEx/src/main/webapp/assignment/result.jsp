@@ -14,15 +14,13 @@
     <%
     String id = (String) request.getAttribute("user_id");
     Boolean result = (Boolean) request.getAttribute("result");
-    if (Boolean.TRUE.equals(result)){ %>
-        <h2><%= id %> 님, 회원가입 성공하였습니다.</h2>
-    <%
+    String message = "";
+    if (Boolean.TRUE.equals(result)){
+        message = id + "님, 회원가입 성공하였습니다.";
     } else {
-    %>
-        <h2>다시 시도해주세요.</h2>
-    <%
-    }
-    %>
+        message = "다시 시도해주세요.";
+    } %>
+    <h2><%= message %></h2>
     <a href="/assignment/memberRegister.html">첫 화면으로</a>
 </body>
 </html>
