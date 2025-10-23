@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ConnectionTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-10-22T07:07:15" hostname="DYNII" time="0.466">
-  <properties/>
-  <testcase name="testConnection()" classname="ConnectionTest" time="0.201"/>
-  <testcase name="testHikariCP()" classname="ConnectionTest" time="0.264"/>
-  <system-out><![CDATA[드라이버 로딩 성공
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
