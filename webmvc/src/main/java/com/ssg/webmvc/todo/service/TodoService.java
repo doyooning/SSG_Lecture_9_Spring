@@ -26,11 +26,10 @@ public enum TodoService {
     TodoService() {
         this.dao = new TodoDAO();
         this.modelMapper = MapperUtil.INSTANCE.get();
-
     }
 
-    // register() TodoDTO 파라미터를 받아서 ModelMapper를 통해서  TodoVO 객체로 변환 후
-    // dao.insert(todoVO) 를 통해ㅑ todoVO 객체를 전달하며 등록기능을 요청
+    // register(): TodoDTO 파라미터를 받아서 ModelMapper를 통해서  TodoVO 객체로 변환 후
+    // dao.insert(todoVO) 를 통해 todoVO 객체를 전달하며 등록기능을 요청
 
     public void register(TodoDTO todoDTO) throws Exception {
         TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
@@ -69,6 +68,22 @@ public enum TodoService {
         ).collect(Collectors.toList());
 
         return dtoList;
+    }
+
+    public TodoVO read(Long tno) throws Exception {
+        TodoVO todoVO = dao.selectOne(tno);
+        log.info("------ read() 호출 ------");
+        return todoVO;
+    }
+
+    public void update(TodoVO vo) throws Exception {
+        dao.updateOne(vo);
+        log.info("------ update() 호출 ------");
+    }
+
+    public void delete(Long tno) throws Exception {
+        dao.delete(tno);
+        log.info("------ delete() 호출 ------");
     }
 }
 

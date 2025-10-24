@@ -15,12 +15,15 @@ public class TodoReadController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         System.out.println("/todo/read doGet()");
 
-        // todo/read?tno=123
         Long tno = Long.parseLong(req.getParameter("tno"));
         TodoDTO dto = TodoService.INSTANCE.get(tno);
 
         req.setAttribute("dto", dto);
         req.getRequestDispatcher("/WEB-INF/todo/read.jsp").forward(req, res);
 
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doPost()");
     }
 }
