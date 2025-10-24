@@ -44,6 +44,8 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.22'
 
     implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    implementation 'org.modelmapper:modelmapper:3.0.0'
 }
 
 test {

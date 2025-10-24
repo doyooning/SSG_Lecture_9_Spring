@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionTest {
+public class ConnectionTests {
     @Test
     public void testConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
