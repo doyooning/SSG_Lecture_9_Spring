@@ -24,13 +24,11 @@
 <%--<h4>${list[0].title}</h4>--%>
 
 <ul>
-    <c:forEach var = "dto" items="${list}">
+    <c:forEach var = "dto" items="${dtoList}">
         <li>${dto}</li>
     </c:forEach>
 </ul>
-    <c:forEach var = 'num' begin="1" end="10">
-        <li>${num}</li>
-    </c:forEach>
+
 
 </body>
 </html>

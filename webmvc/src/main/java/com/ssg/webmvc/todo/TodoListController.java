@@ -2,6 +2,7 @@ package com.ssg.webmvc.todo;
 
 import com.ssg.webmvc.todo.dto.TodoDTO;
 import com.ssg.webmvc.todo.service.TodoService;
+import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +13,25 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "todoListController", urlPatterns = "/todo/list")
+@Log4j2
 public class TodoListController extends HttpServlet {
+
+    private TodoService todoService = TodoService.INSTANCE;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("/todo/list doGet() 호출");
+//        System.out.println("/todo/list doGet() 호출");
+        log.info("/todo/list doGet 호출");
+        log.info("/todo list.............");
 
-        List<TodoDTO> todoDTOList = TodoService.INSTANCE.getList();
-        req.setAttribute("list", todoDTOList);
-        req.getRequestDispatcher("/WEB-INF/todo/list.jsp").forward(req, resp);
+        try {
+            List<TodoDTO> dtoList = todoService.listAll();
+            req.setAttribute("dtoList", dtoList);
+            req.getRequestDispatcher("/WEB-INF/todo/list.jsp").forward(req, resp);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ServletException("todo list error");
+        }
+
     }
 }
