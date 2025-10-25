@@ -34,7 +34,7 @@ public class PostListServlet extends HttpServlet {
         try {
             List<PostDTO> dtoList = postService.getList();
             req.setAttribute("dtoList", dtoList);
-            req.getRequestDispatcher("/WEB-INF/posts/list.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/views/list.jsp").forward(req,resp);
 
         } catch (Exception e) {
             log.error(e.getMessage());

@@ -28,9 +28,13 @@ public enum PostService {
         return dtoList;
     }
 
-    public PostDTO getDetail(long id) {}
+    public PostDTO getDetail(long id) {
+        return null;
+    }
     // 조회수 증가 포함
-    public long write(PostDTO post) {}
+    public long write(PostDTO post) {
+        return 0L;
+    }
     // 검증 + 저장
     public void edit(PostDTO post, String passphrase) {}
     // 비번검증 + 수정

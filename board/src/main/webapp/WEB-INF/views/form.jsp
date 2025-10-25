@@ -17,18 +17,21 @@
 
 <form id="form1" action="/posts/save" method="post">
     <div>
+        <p>글 번호</p>
         <input type="text" name="postId" value="${dto.postId}" readonly>
     </div>
     <div>
+        <p>글 제목</p>
         <input type="text" name="title" value="${dto.title}" >
     </div>
     <div>
+        <p>글 내용</p>
         <input type="text" name="content" value="${dto.content}">
     </div>
     <div>
+        <p>글쓴이</p>
         <input type="text" name="writer" value="${dto.writer}" readonly>
     </div>
-
     <div>
         <button type="submit">작성 완료</button>
     </div>

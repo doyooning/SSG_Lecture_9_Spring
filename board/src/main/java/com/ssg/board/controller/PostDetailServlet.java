@@ -23,6 +23,10 @@ public class PostDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/view → PostDetailServlet
+
+//        req.setAttribute("dto", dto);
+        req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req,resp);
+
     }
 
     @Override

@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--공통 오류 페이지(메시지/뒤로가기 링크)--%>
 
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<%--공통 오류 페이지(메시지/뒤로가기 링크)--%>
+
 </body>
 </html>

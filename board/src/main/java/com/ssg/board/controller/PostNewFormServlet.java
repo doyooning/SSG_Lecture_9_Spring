@@ -21,6 +21,8 @@ public class PostNewFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/new → PostNewFormServlet
+//        req.setAttribute("dto", dto);
+        req.getRequestDispatcher("/WEB-INF/views/form.jsp").forward(req,resp);
     }
 
     @Override

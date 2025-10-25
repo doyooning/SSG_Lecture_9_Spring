@@ -18,19 +18,19 @@ public class PostDAOImpl implements PostDAO {
     public List<PostVO> findAll() {
         String sql = "select * from board_post";
         List<PostVO> list = new ArrayList<>();
-        try (@Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
-             @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery();
         ) {
             while (resultSet.next()) {
                 PostVO vo = PostVO.builder()
-                        .postId(resultSet.getLong("postId"))
+                        .postId(resultSet.getLong("post_id"))
                         .title(resultSet.getString("title"))
                         .content(resultSet.getString("content"))
                         .writer(resultSet.getString("writer"))
                         .passphrase(resultSet.getString("passphrase"))
-                        .createdAt(LocalDateTime.from(resultSet.getDate("createdAt").toLocalDate()))
-                        .updatedAt(LocalDateTime.from(resultSet.getDate("updatedAt").toLocalDate()))
+                        .createdAt(resultSet.getTimestamp("created_at").toLocalDateTime())
+                        .updatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime())
                         .build();
                 list.add(vo);
             }
