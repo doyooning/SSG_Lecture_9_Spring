@@ -28,11 +28,15 @@ public class PostDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/view → PostDetailServlet
 
-        long id = Long.parseLong(req.getParameter("postId"));
-        PostDTO postDTO = postService.getDetail(id);
-        req.setAttribute("dto", postDTO);
-        req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req,resp);
-
+        try {
+            Long id = Long.parseLong(req.getParameter("post_id"));
+            PostDTO postDTO = postService.getDetail(id);
+            req.setAttribute("dto", postDTO);
+            req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req,resp);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ServletException("detail error");
+        }
     }
 
     @Override
