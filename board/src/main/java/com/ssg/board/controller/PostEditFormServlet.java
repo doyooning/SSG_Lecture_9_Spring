@@ -24,6 +24,7 @@ public class PostEditFormServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/edit → PostEditFormServlet
+        req.setCharacterEncoding("UTF-8");
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             PostDTO postDTO = postService.getDetail(id);
@@ -38,5 +39,6 @@ public class PostEditFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // POST /posts/update <passphrase 검증 후 업데이트 및 리디렉션>
+
     }
 }

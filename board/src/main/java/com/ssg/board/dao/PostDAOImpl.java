@@ -3,10 +3,9 @@ package com.ssg.board.dao;
 import com.ssg.board.domain.PostVO;
 import com.ssg.board.util.ConnectionUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public List<PostVO> findAll() {
-        String sql = "select * from board_post order by created_at desc";
+        String sql = "select * from board_post order by updated_at desc";
         List<PostVO> list = new ArrayList<>();
         try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -100,8 +99,20 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public boolean update(PostVO post) {
-        String sql = "update into board_post set title = ?, content = ? where post_id = ?";
+        String sql = "update board_post set title = ?, content = ?, updated_at = now() where post_id = ?";
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+        ) {
+            pstmt.setString(1, post.getTitle());
+            pstmt.setString(2, post.getContent());
+            pstmt.setLong(3, post.getPostId());
+            pstmt.executeUpdate();
 
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

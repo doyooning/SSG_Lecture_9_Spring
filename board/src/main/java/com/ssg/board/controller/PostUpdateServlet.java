@@ -23,14 +23,24 @@ public class PostUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // POST /posts/update → PostUpdateServlet
+        req.setCharacterEncoding("UTF-8");
         try {
-            Long id = Long.parseLong(req.getParameter("id"));
-            PostDTO postDTO = postService.getDetail(id);
+            String passphrase = req.getParameter("passphrase");
+            PostDTO postDTO = PostDTO.builder()
+                    .postId(Long.parseLong(req.getParameter("id")))
+                    .title(req.getParameter("title"))
+                    .content(req.getParameter("content"))
+                    .writer(req.getParameter("writer"))
+                    .build();
             req.setAttribute("dto", postDTO);
-            postService.edit(postDTO, postDTO.getPassphrase());
+            boolean result = postService.edit(postDTO, passphrase);
+            if (!result) {
+                req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req,resp);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        resp.setCharacterEncoding("UTF-8");
         resp.sendRedirect("/posts");
     }
 }

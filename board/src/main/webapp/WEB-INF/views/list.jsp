@@ -72,6 +72,7 @@
         <th>Title</th>
         <th>writer</th>
         <th>createdAt</th>
+        <th>updatedAt</th>
     </tr>
     </thead>
     <tbody>
@@ -87,6 +88,7 @@
 
             <td>${dto.writer}</td>
             <td>${dto.createdAt}</td>
+            <td>${dto.updatedAt}</td>
         </tr>
     </c:forEach>
     </tbody>

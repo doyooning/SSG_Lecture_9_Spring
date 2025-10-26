@@ -18,7 +18,10 @@
 <%
 
 %>
-<form id="form1" action="/posts/save" method="post">
+<form id="form1" action="<c:choose>
+                  <c:when test='${not empty dto}'>/posts/update</c:when>
+                  <c:otherwise>/posts/save</c:otherwise>
+              </c:choose>" method="post">
     <div>
         <p>글 제목</p>
         <input type="text" name="title" value="${dto.title}">
@@ -34,7 +37,7 @@
     </div>
     <div>
         <p>글 비밀번호</p>
-        <input type="text" name="passphrase" value="${dto.passphrase}" >
+        <input type="text" name="passphrase" value="" >
     </div>
     <c:if test="${not empty dto}">
         <input type="hidden" name="id" value="${dto.postId}">
