@@ -1,5 +1,7 @@
 package com.ssg.board.controller;
 
+import com.ssg.board.dto.PostDTO;
+import com.ssg.board.service.PostService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import java.io.IOException;
 @WebServlet(name = "PostDeleteServlet", value = "/posts/delete")
 @Log4j2
 public class PostDeleteServlet extends HttpServlet {
+    private PostService postService = PostService.INSTANCE;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -25,5 +28,21 @@ public class PostDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // POST /posts/delete → PostDeleteServlet
+
+        try {
+            Long id = Long.parseLong(req.getParameter("id"));
+            String pwd = req.getParameter("pwd");
+            if (postService.remove(id, pwd)) {
+                resp.sendRedirect("/posts");
+            } else {
+                req.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(req, resp);
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 }

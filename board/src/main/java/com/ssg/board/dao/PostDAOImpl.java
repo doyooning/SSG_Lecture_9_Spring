@@ -100,16 +100,47 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public boolean update(PostVO post) {
+        String sql = "update into board_post set title = ?, content = ? where post_id = ?";
+
         return false;
     }
 
     @Override
     public boolean delete(long id) {
+        String sql = "delete from board_post where post_id=?";
+
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+        ) {
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean checkPassphrase(long id, String passphrase) {
+        String sql = "select passphrase from board_post where post_id=?";
+
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+        ) {
+            pstmt.setLong(1, id);
+            try (ResultSet rs = pstmt.executeQuery();) {
+                rs.next();
+                String currentPw = rs.getString("passphrase");
+                boolean match = currentPw.equals(passphrase);
+                return match;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

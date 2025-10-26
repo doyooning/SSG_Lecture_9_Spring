@@ -16,22 +16,29 @@
 <body>
 
 <div>
+    <p>글 번호</p>
     <input type="text" name="postId" value="${dto.postId}" readonly>
 </div>
 <div>
+    <p>글 제목</p>
     <input type="text" name="title" value="${dto.title}" readonly>
 </div>
 <div>
+    <p>글 내용</p>
     <input type="text" name="content" value="${dto.content}" readonly>
 </div>
 <div>
+    <p>글쓴이</p>
     <input type="text" name="writer" value="${dto.writer}" readonly>
 </div>
 <div>
-    <form action="/posts/edit?id=${dto.postId}" method="get">
+    <form action="/posts/edit" method="get">
+        <input type="hidden" name="id" value="${dto.postId}">
         <button type="submit">수정</button>
     </form>
     <form action="/posts/delete" method="post">
+        <input type="hidden" name="id" value="${dto.postId}">
+        <input type="text" name="pwd" value="" placeholder="비밀번호 입력">
         <button type="submit">삭제</button>
     </form>
 </div>

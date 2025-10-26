@@ -65,11 +65,23 @@ public enum PostService {
         return result;
     }
     // 검증 + 저장
-    public void edit(PostDTO post, String passphrase) {
-
+    public boolean edit(PostDTO post, String passphrase) {
+        boolean result = false;
+        PostVO postVO = modelMapper.map(post, PostVO.class);
+        if (dao.checkPassphrase(post.getPostId(), passphrase)) {
+            result = dao.update(postVO);
+        }
+        return result;
     }
     // 비번검증 + 수정
-    public void remove(long id, String passphrase) {}
+    public boolean remove(long id, String passphrase) {
+        // dao.checkpassphrase로 비번검증
+        boolean result = false;
+        if (dao.checkPassphrase(id, passphrase)) {
+            result = dao.delete(id);
+        }
+        return result;
+    }
     // 비번검증 + 삭제
 }
 

@@ -29,14 +29,23 @@
     </div>
     <div>
         <p>글쓴이</p>
-        <input type="text" name="writer" value="${dto.writer}">
+        <input type="text" name="writer" value="${dto.writer}"
+               <c:if test="${not empty dto}">readonly</c:if>>
     </div>
     <div>
         <p>글 비밀번호</p>
         <input type="text" name="passphrase" value="${dto.passphrase}" >
     </div>
+    <c:if test="${not empty dto}">
+        <input type="hidden" name="id" value="${dto.postId}">
+    </c:if>
     <div>
-        <button type="submit">작성 완료</button>
+        <button type="submit">
+            <c:choose>
+                <c:when test="${not empty dto}">수정 완료</c:when>
+                <c:otherwise>작성 완료</c:otherwise>
+            </c:choose>
+        </button>
     </div>
 </form>
 
