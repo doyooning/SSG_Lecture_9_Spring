@@ -8,6 +8,7 @@ import com.ssg.board.util.MapperUtil;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public enum PostService {
@@ -29,6 +30,12 @@ public enum PostService {
     }
 
     public PostDTO getDetail(long id) {
+        Optional<PostVO> postVO = dao.findById(id);
+        if (postVO.isPresent()) {
+            PostVO vo = postVO.get();
+            PostDTO postDTO = modelMapper.map(vo, PostDTO.class);
+            return postDTO;
+        }
         return null;
     }
     // 조회수 증가 포함

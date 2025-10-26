@@ -2,12 +2,10 @@ package com.ssg.board.dao;
 
 import com.ssg.board.domain.PostVO;
 import com.ssg.board.util.ConnectionUtil;
-import lombok.Cleanup;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,21 +14,21 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public List<PostVO> findAll() {
-        String sql = "select * from board_post";
+        String sql = "select * from board_post order by created_at desc";
         List<PostVO> list = new ArrayList<>();
         try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery();
         ) {
-            while (resultSet.next()) {
+            while (rs.next()) {
                 PostVO vo = PostVO.builder()
-                        .postId(resultSet.getLong("post_id"))
-                        .title(resultSet.getString("title"))
-                        .content(resultSet.getString("content"))
-                        .writer(resultSet.getString("writer"))
-                        .passphrase(resultSet.getString("passphrase"))
-                        .createdAt(resultSet.getTimestamp("created_at").toLocalDateTime())
-                        .updatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime())
+                        .postId(rs.getLong("post_id"))
+                        .title(rs.getString("title"))
+                        .content(rs.getString("content"))
+                        .writer(rs.getString("writer"))
+                        .passphrase(rs.getString("passphrase"))
+                        .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
+                        .updatedAt(rs.getTimestamp("updated_at").toLocalDateTime())
                         .build();
                 list.add(vo);
             }
@@ -47,6 +45,29 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public Optional<PostVO> findById(long id) {
+        String sql = "select * from board_post where post_id=?";
+
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+        ) {
+            pstmt.setLong(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();){
+                PostVO vo = PostVO.builder()
+                        .postId(rs.getLong("post_id"))
+                        .title(rs.getString("title"))
+                        .content(rs.getString("content"))
+                        .writer(rs.getString("writer"))
+                        .passphrase(rs.getString("passphrase"))
+                        .createdAt(rs.getTimestamp("created_at").toLocalDateTime())
+                        .updatedAt(rs.getTimestamp("updated_at").toLocalDateTime())
+                        .build();
+                return Optional.of(vo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return Optional.empty();
     }
 

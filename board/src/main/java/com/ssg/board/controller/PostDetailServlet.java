@@ -1,5 +1,7 @@
 package com.ssg.board.controller;
 
+import com.ssg.board.dto.PostDTO;
+import com.ssg.board.service.PostService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
@@ -18,13 +20,17 @@ import java.time.format.DateTimeFormatter;
 @WebServlet(name = "PostDetailServlet", value = "/posts/view")
 @Log4j2
 public class PostDetailServlet extends HttpServlet {
+
+    private PostService postService = PostService.INSTANCE;
     private final DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/view → PostDetailServlet
 
-//        req.setAttribute("dto", dto);
+        long id = Long.parseLong(req.getParameter("postId"));
+        PostDTO postDTO = postService.getDetail(id);
+        req.setAttribute("dto", postDTO);
         req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req,resp);
 
     }
