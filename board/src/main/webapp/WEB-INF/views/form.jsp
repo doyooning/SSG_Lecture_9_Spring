@@ -14,15 +14,14 @@
     <title>Form</title>
 </head>
 <body>
+<%--작성 완료 분기 필요 - 신규 작성, 수정--%>
+<%
 
+%>
 <form id="form1" action="/posts/save" method="post">
     <div>
-        <p>글 번호</p>
-        <input type="text" name="postId" value="${dto.postId}" readonly>
-    </div>
-    <div>
         <p>글 제목</p>
-        <input type="text" name="title" value="${dto.title}" >
+        <input type="text" name="title" value="${dto.title}">
     </div>
     <div>
         <p>글 내용</p>
@@ -30,7 +29,11 @@
     </div>
     <div>
         <p>글쓴이</p>
-        <input type="text" name="writer" value="${dto.writer}" readonly>
+        <input type="text" name="writer" value="${dto.writer}">
+    </div>
+    <div>
+        <p>글 비밀번호</p>
+        <input type="text" name="passphrase" value="${dto.passphrase}" >
     </div>
     <div>
         <button type="submit">작성 완료</button>

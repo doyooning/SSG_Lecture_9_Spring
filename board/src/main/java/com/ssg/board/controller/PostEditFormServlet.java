@@ -1,5 +1,7 @@
 package com.ssg.board.controller;
 
+import com.ssg.board.dto.PostDTO;
+import com.ssg.board.service.PostService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
@@ -18,13 +20,23 @@ import java.io.IOException;
 @WebServlet(name = "PostEditFormServlet", value = "/posts/edit")
 @Log4j2
 public class PostEditFormServlet extends HttpServlet {
+    private PostService postService = PostService.INSTANCE;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET /posts/edit → PostEditFormServlet
+        try {
+            Long id = Long.parseLong(req.getParameter("id"));
+            PostDTO postDTO = postService.getDetail(id);
+            req.setAttribute("dto", postDTO);
+            req.getRequestDispatcher("/WEB-INF/views/form.jsp").forward(req,resp);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ServletException("edit error");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        // POST /posts/update <passphrase 검증 후 업데이트 및 리디렉션>
     }
 }

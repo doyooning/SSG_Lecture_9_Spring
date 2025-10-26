@@ -6,6 +6,7 @@ import com.ssg.board.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +54,7 @@ public class PostDAOImpl implements PostDAO {
             pstmt.setLong(1, id);
 
             try (ResultSet rs = pstmt.executeQuery();){
+                rs.next();
                 PostVO vo = PostVO.builder()
                         .postId(rs.getLong("post_id"))
                         .title(rs.getString("title"))
@@ -73,6 +75,26 @@ public class PostDAOImpl implements PostDAO {
 
     @Override
     public long save(PostVO post) {
+        String sql = "insert into board_post(title, content, writer, passphrase) values(?,?,?,?)";
+
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ) {
+            pstmt.setString(1, post.getTitle());
+            pstmt.setString(2, post.getContent());
+            pstmt.setString(3, post.getWriter());
+            pstmt.setString(4, post.getPassphrase());
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            rs.next();
+            long id = rs.getLong(1);
+            return id;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 

@@ -22,7 +22,7 @@
     <input type="text" name="title" value="${dto.title}" readonly>
 </div>
 <div>
-    <input type="text" name="content" value="${dto.content}">
+    <input type="text" name="content" value="${dto.content}" readonly>
 </div>
 <div>
     <input type="text" name="writer" value="${dto.writer}" readonly>

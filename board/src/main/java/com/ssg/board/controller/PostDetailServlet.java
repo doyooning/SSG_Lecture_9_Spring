@@ -29,7 +29,7 @@ public class PostDetailServlet extends HttpServlet {
         // GET /posts/view → PostDetailServlet
 
         try {
-            Long id = Long.parseLong(req.getParameter("post_id"));
+            Long id = Long.parseLong(req.getParameter("id"));
             PostDTO postDTO = postService.getDetail(id);
             req.setAttribute("dto", postDTO);
             req.getRequestDispatcher("/WEB-INF/views/detail.jsp").forward(req,resp);

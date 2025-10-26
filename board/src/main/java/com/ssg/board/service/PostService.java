@@ -5,12 +5,14 @@ import com.ssg.board.dao.PostDAOImpl;
 import com.ssg.board.domain.PostVO;
 import com.ssg.board.dto.PostDTO;
 import com.ssg.board.util.MapperUtil;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Log4j2
 public enum PostService {
     INSTANCE;
 
@@ -40,10 +42,32 @@ public enum PostService {
     }
     // 조회수 증가 포함
     public long write(PostDTO post) {
-        return 0L;
+
+        String titleRegix = "^.{2,200}$";
+        String contentRegix = "^.{5,}$";
+        String writerRegix = "^.{1,50}$";
+        String passphraseRegix = "^.{4,20}$";
+
+        log.info("post: " + post.toString());
+        if (!post.getTitle().matches(titleRegix)) {
+            return 0L;
+        } else if (!post.getContent().matches(contentRegix)) {
+            return 0L;
+        } else if (!post.getWriter().matches(writerRegix)) {
+            return 0L;
+        } else if (!post.getPassphrase().matches(passphraseRegix)) {
+            return 0L;
+        }
+        // 검증 다 끝내고 저장 -> dao.save()
+        PostVO postVO = modelMapper.map(post, PostVO.class);
+        long result = dao.save(postVO);
+        log.info("result: " + result);
+        return result;
     }
     // 검증 + 저장
-    public void edit(PostDTO post, String passphrase) {}
+    public void edit(PostDTO post, String passphrase) {
+
+    }
     // 비번검증 + 수정
     public void remove(long id, String passphrase) {}
     // 비번검증 + 삭제
