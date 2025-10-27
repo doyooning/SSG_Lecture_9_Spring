@@ -20,7 +20,6 @@ public class MemberDAOImpl implements MemberDAO {
     @Autowired
     private DataSource dataSource;
 
-
     @Override
     public void insertMember(Member member) {
         String sql = "insert into member values(?,?,?)";
@@ -35,7 +34,6 @@ public class MemberDAOImpl implements MemberDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
