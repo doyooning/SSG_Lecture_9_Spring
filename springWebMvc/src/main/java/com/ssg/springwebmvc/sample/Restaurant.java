@@ -4,14 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @ToString
-@RequiredArgsConstructor // 생성자 주입 방식
-public class SampleService {
+@RequiredArgsConstructor
+public class Restaurant {
     @Autowired
-    private final SampleDAO sampleDAO;
-
-
+    private final Chef chef;
 }

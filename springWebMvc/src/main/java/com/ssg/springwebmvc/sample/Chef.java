@@ -3,9 +3,8 @@ package com.ssg.springwebmvc.sample;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface SampleDAO {
-
+@Component
+@ToString
+public class Chef {
 }
