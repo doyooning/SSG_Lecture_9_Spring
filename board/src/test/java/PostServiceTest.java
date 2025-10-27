@@ -1,6 +1,5 @@
-package com.ssg.board.service;
-
 import com.ssg.board.dto.PostDTO;
+import com.ssg.board.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
