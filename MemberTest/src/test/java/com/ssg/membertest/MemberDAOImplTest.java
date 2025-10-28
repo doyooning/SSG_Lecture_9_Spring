@@ -2,7 +2,6 @@ package com.ssg.membertest;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
 @ExtendWith(SpringExtension.class) // JUnit 버전에서 spring-test 이용하기 위한 어노테이션
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -45,12 +43,12 @@ public class MemberDAOImplTest {
                 .mname("신길동")
                 .build();
         log.info(member.toString());
-        memberService.insertMember(member);
+        memberService.joinMember(member);
     }
 
     @Test
     public void printMember() {
-        List<Member> members = memberService.printMember();
+        List<Member> members = memberService.memberList();
         for (Member member : members) {
             log.info(member.toString());
         }

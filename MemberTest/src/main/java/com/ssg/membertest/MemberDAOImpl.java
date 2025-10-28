@@ -2,6 +2,7 @@ package com.ssg.membertest;
 
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-@Primary
 @Repository
 @ToString
 public class MemberDAOImpl implements MemberDAO {
@@ -21,7 +21,7 @@ public class MemberDAOImpl implements MemberDAO {
     private DataSource dataSource;
 
     @Override
-    public void insertMember(Member member) {
+    public int insertMember(Member member) {
         String sql = "insert into member values(?,?,?)";
 
         try (Connection conn = dataSource.getConnection();
@@ -29,11 +29,13 @@ public class MemberDAOImpl implements MemberDAO {
             pstmt.setString(1, member.getMid());
             pstmt.setString(2, member.getMpw());
             pstmt.setString(3, member.getMname());
-            pstmt.executeUpdate();
 
+            int result = pstmt.executeUpdate();
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     @Override
