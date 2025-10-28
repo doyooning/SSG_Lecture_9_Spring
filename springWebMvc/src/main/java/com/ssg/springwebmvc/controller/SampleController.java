@@ -1,8 +1,11 @@
 package com.ssg.springwebmvc.controller;
 
+import com.ssg.springwebmvc.dto.TodoDTO;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,5 +38,17 @@ public class SampleController {
     public void ex03(LocalDate dueDate) {
         log.info("Ex03 Controller!");
         log.info("dueDate: " + dueDate);
+    }
+
+    @GetMapping("/ex04")
+    public void ex04(Model model) {
+        log.info("Ex04 Model Parameter!");
+        model.addAttribute("message", "Hello World !");
+    }
+
+    @GetMapping("/ex04_1")
+    public void ex04(TodoDTO todoDTO, Model model) {
+        log.info("todoDTO");
+        model.addAttribute("todoDTO", todoDTO);
     }
 }

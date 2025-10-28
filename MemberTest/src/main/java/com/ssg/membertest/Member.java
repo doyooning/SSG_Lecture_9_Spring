@@ -5,7 +5,7 @@ import lombok.*;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @ToString
 public class Member {
     private String mid;
