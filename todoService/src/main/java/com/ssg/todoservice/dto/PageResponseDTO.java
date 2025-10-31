@@ -1,9 +1,13 @@
 package com.ssg.todoservice.dto;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
+@Getter
+@ToString
 public class PageResponseDTO<E> {
     private int page;
     private int size;
@@ -42,5 +46,21 @@ public class PageResponseDTO<E> {
         this.end = end > last ? last : end;
         this.prev = this.start > 1;
         this.next = total > this.end * this.size;
+    }
+
+    private String link;
+
+    public int getSkip(){
+        return (page -1) * 10;
+    }
+
+    public String getLink() {
+        if(link == null){
+            StringBuilder builder = new StringBuilder();
+            builder.append("page=" + this.page);
+            builder.append("&size=" + this.size);
+            link = builder.toString();
+        }
+        return link;
     }
 }

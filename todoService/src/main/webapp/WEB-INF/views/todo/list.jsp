@@ -50,19 +50,18 @@
                         <form action="/todo/list" method="get">
                             <input type="hidden" name="size" value="${pageRequestDTO.size}">
                             <div class="mb-3">
-                                <input type="checkbox" name="finished" ${pageRequestDTO.finished?"checked":""} >완료여부
+                                <input type="checkbox" name="finished" >완료여부
                             </div>
                             <div class="mb-3">
                                 <input type="checkbox" name="types"
-                                       value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목
+                                       value="t" >제목
                                 <input type="checkbox" name="types"
-                                       value="w"  ${pageRequestDTO.checkType("w")?"checked":""}>작성자
-                                <input type="text" name="keyword" class="form-control"
-                                       value='<c:out value="${pageRequestDTO.keyword}"/>'>
+                                       value="w" >작성자
+                                <input type="text" name="keyword" class="form-control" >
                             </div>
                             <div class="input-group mb-3 dueDateDiv">
-                                <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
-                                <input type="date" name="to" class="form-control" value="${pageRequestDTO.to}">
+                                <input type="date" name="from" class="form-control" >
+                                <input type="date" name="to" class="form-control" >
                             </div>
                             <div class="input-group mb-3">
                                 <div class="float-end">
@@ -96,15 +95,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${dtoList}" var="dto">
+                            <c:forEach items="${responseDTO.dtoList}" var="dto" varStatus="status">
                                 <tr>
+                                    <th scope="row">${status.count}</th>
                                     <td>
-                                        <a href="/todo/read?tno=${dto.tno}"><c:out value="${dto.tno}"/></a>
-
-                                    </td>
-                                    <td>
-                                        <a href="/todo/read?tno=${dto.tno}"><c:out value="${dto.title}"/></a>
-
+                                        <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}"
+                                           class="text-decoration-none"
+                                           data-tno="${dto.tno}"><c:out value="${dto.title}"/></a>
                                     </td>
                                     <td><c:out value="${dto.writer}"/></td>
                                     <td><c:out value="${dto.dueDate}"/></td>

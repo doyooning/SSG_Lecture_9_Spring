@@ -1,5 +1,6 @@
 package com.ssg.todoservice.controller;
 
+import com.ssg.todoservice.dto.PageRequestDTO;
 import com.ssg.todoservice.dto.TodoDTO;
 import com.ssg.todoservice.service.TodoService;
 import lombok.extern.log4j.Log4j2;
@@ -22,10 +23,19 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @RequestMapping("/list")
-    public void list(Model model) {
-        log.info("@@@@@ Todo list @@@@@");
-        model.addAttribute("dtoList", todoService.getAll());
+//    @RequestMapping("/list")
+//    public void list(Model model) {
+//        log.info("@@@@@ Todo list @@@@@");
+//        model.addAttribute("dtoList", todoService.getAll());
+//    }
+
+    @GetMapping("/list")
+    public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+        log.info("pageRequestDTO:" + pageRequestDTO);
+        if (bindingResult.hasErrors()) {
+            pageRequestDTO = PageRequestDTO.builder().build();
+        }
+        model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
     }
 
     @GetMapping("/register")
