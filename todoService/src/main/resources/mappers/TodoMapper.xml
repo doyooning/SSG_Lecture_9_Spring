@@ -25,7 +25,7 @@
 
     <!-- MyBatis는 기본적으로 getXXX, setXXX 를 통해서 동작,
       #{skip}은 Page-->
-    <select id="selectList" resultType="com.ssg.todoservice.domain.TodoVO">
+    <select id="selectAll" resultType="com.ssg.todoservice.domain.TodoVO">
         SELECT * FROM todo
         ORDER BY tno desc limit #{skip}, #{size}
     </select>

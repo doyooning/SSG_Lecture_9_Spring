@@ -48,19 +48,5 @@ public class PageResponseDTO<E> {
         this.next = total > this.end * this.size;
     }
 
-    private String link;
 
-    public int getSkip(){
-        return (page -1) * 10;
-    }
-
-    public String getLink() {
-        if(link == null){
-            StringBuilder builder = new StringBuilder();
-            builder.append("page=" + this.page);
-            builder.append("&size=" + this.size);
-            link = builder.toString();
-        }
-        return link;
-    }
 }

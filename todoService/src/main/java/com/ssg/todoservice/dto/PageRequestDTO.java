@@ -27,8 +27,20 @@ public class PageRequestDTO {
     @Positive
     private int size = 10; // 하나의 페이지에 담길 글의 수
 
+    private String link;
+
     public int getSkip(){
-        return (page - 1) * size;
+        return (page -1) * 10;
+    }
+
+    public String getLink() {
+        if(link == null){
+            StringBuilder builder = new StringBuilder();
+            builder.append("page=" + this.page);
+            builder.append("&size=" + this.size);
+            link = builder.toString();
+        }
+        return link;
     }
 
     private String[] types;
