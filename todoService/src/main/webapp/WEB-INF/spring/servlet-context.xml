@@ -14,10 +14,11 @@
     <context:component-scan base-package="com.ssg.todoservice.controller"/>
 
     <!-- conversionService 빈 등록한 후 스프링MVC 처리를 위해 annotation-driven이 반드시 존재해야 한다 -->
-<!--    <mvc:annotation-driven conversion-service="conversionService"/>-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
 
-    <mvc:resources mapping="/views/**/*" location="/resources/"/>
+    <!-- main/resources/static/까지 찾는다   -->
+    <mvc:resources mapping="/resources/**" location="classpath:/static/"/>
+<!--    <mvc:resources mapping="/resources/**" location="/resources/"/>-->
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">

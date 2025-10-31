@@ -1,10 +1,9 @@
 package com.ssg.todoservice.mapper;
 
 import com.ssg.todoservice.domain.TodoVO;
-import org.apache.ibatis.annotations.Mapper;
+import com.ssg.todoservice.dto.PageRequestDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TodoMapper {
 
@@ -14,4 +13,6 @@ public interface TodoMapper {
     TodoVO selectOne(Long tno);
     void delete(Long tno);
     void update(TodoVO todoVO);
+    List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+    int getCount();
 }
