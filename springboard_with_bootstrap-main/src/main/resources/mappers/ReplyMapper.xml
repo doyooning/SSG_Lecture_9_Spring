@@ -17,13 +17,17 @@
         select * from reply where rno = #{rno}
     </select>
 
-    <update id="update">
+    <update id="updateOne">
         update reply set replyText = #{replyText}, updateDate = now() where rno = #{rno}
     </update>
 
-    <delete id="delete">
+    <delete id="deleteOne">
         delete from reply where rno = #{rno}
     </delete>
 
+    <select id="getReplyList" resultType="ReplyVO">
+        select * from reply where bno = #{bno} and rno > 0
+        limit #{cri.skip} , #{cri.amount}
+    </select>
 
 </mapper>

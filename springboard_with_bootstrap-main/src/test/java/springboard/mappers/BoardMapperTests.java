@@ -64,7 +64,7 @@ public class BoardMapperTests {
 
     int updateCount = boardMapper.update(boardVO);
 
-    log.info("update: " + updateCount);
+    log.info("updateOne: " + updateCount);
 
   }
 

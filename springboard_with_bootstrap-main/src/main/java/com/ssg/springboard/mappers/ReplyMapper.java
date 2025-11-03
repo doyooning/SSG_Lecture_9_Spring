@@ -1,6 +1,8 @@
 package com.ssg.springboard.mappers;
 
+import com.ssg.springboard.domain.Criteria;
 import com.ssg.springboard.domain.ReplyVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ public interface ReplyMapper {
 
     ReplyVO selectOne(Long rno);
 
-    void update(ReplyVO replyVO);
-    void delete(Long rno);
-    List<ReplyVO> selectAllReply();
+    int updateOne(ReplyVO replyVO);
+    int deleteOne(Long rno);
+    List<ReplyVO> getReplyList(@Param("cri") Criteria cri, @Param("bno") Long bno);
 }

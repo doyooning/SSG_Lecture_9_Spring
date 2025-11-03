@@ -1,7 +1,6 @@
 package springboard.mappers;
 
 
-import com.ssg.springboard.domain.BoardVO;
 import com.ssg.springboard.domain.Criteria;
 import com.ssg.springboard.domain.ReplyVO;
 import com.ssg.springboard.mappers.ReplyMapper;
@@ -58,20 +57,27 @@ public class ReplyMapperTests {
 
   @Test
   public void testUpdate() {
+    ReplyVO replyVO = ReplyVO.builder()
+            .rno(4L)
+            .replyText("---updated---")
+            .build();
 
-    Long rno = 4L;
-    ReplyVO replyVO = replyMapper.selectOne(rno);
-    replyVO.setReplyText("---updated---");
-
-    replyMapper.update(replyVO);
-    log.info(replyVO);
+    log.info(replyMapper.updateOne(replyVO));
   }
 
   @Test
   public void testDelete() {
     Long rno = 4L;
-    replyMapper.delete(rno);
+    log.info(replyMapper.deleteOne(rno));
   }
+
+  @Test
+  public void testSelectAll() {
+    Criteria cri = new Criteria();
+
+    replyMapper.getReplyList(cri, 683L).forEach(replyVO -> log.info(replyVO));
+  }
+
 
   @Test
   public void testPage() {
@@ -83,7 +89,6 @@ public class ReplyMapperTests {
 //    java.util.List<BoardVO> list = replyMapper.getPage(criteria);
 //
 //    list.forEach(boardVO -> log.info(boardVO));
-
   }
 
 }
