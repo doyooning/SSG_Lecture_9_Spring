@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface ReplyMapper {
     Long insert(ReplyVO replyVO);
-
     ReplyVO selectOne(Long rno);
-
+    int getTotal(Long bno);
     int updateOne(ReplyVO replyVO);
     int deleteOne(Long rno);
     List<ReplyVO> getReplyList(@Param("cri") Criteria cri, @Param("bno") Long bno);
+
 }

@@ -27,7 +27,7 @@ public class ReplyMapperTests {
   @Test
   public void testList() {
 
-//    replyMapper.getList().forEach(replyVO -> log.info(replyDTO));
+//    replyMapper.getListByBno().forEach(replyVO -> log.info(replyDTO));
 
   }
 

@@ -17,6 +17,5 @@ public class TimeService {
 
         timeMapper.insert1(str);
         timeMapper.insert2(str);
-
     }
 }

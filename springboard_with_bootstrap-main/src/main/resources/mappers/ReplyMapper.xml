@@ -30,4 +30,11 @@
         limit #{cri.skip} , #{cri.amount}
     </select>
 
+    <select id="getTotal" resultType="int">
+        select count(rno)
+        from
+        reply
+        where rno > 0 and bno = #{bno}
+    </select>
+
 </mapper>
